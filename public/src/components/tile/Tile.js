@@ -5,10 +5,16 @@ import {
   CardBody,
   ListGroup,
   ListGroupItem,
-  Button 
+  Button,
+  FormText
 } from 'reactstrap';
 
-export const Tile = ({ name, phone, email }) => {
+export const Tile = ({ name, phone, email, appointments }) => {
+  // const listAppointments = appointments.map( appointment => {
+  //   return (
+  //     <li key={ Math.random() }>Appointment</li>
+  //   )
+  // })
 
   return (
     <Card     
@@ -30,7 +36,8 @@ export const Tile = ({ name, phone, email }) => {
           Email: { email }
         </ListGroupItem>
         <ListGroupItem>
-          List appointment dates here
+          {/* { appointments.length < 1 ? <FormText>No Appointments</FormText> : <ul>{ listAppointments() }</ul> } */}
+          { console.log( 'appt', appointments)}
         </ListGroupItem>
         </ListGroup>
         <Button>Set Up Appointment</Button>

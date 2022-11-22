@@ -23,7 +23,7 @@ export const ContactPicker = ({ contacts }) => {
   }
   return (
     <div>
-      <div class="contactsContainer">
+      <div className="contactsContainer">
 
         { listContacts }
 

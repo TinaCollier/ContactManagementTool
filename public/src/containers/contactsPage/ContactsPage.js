@@ -25,16 +25,19 @@ export const ContactsPage = ({ contacts, setContacts }) => {
   const [ name, setName ] = useState( '' );
   const [ phone, setPhone ] = useState( '' );
   const [ email, setEmail ] = useState( '' );
+  const [ appointments, setAppointments ] = useState( [] );
   const [ submitting, setSubmitting ] = useState( false );
+  const [ showSearch, setShowSearch ] = useState( false );
   
-  const addContact = ( name, phone, email ) => {
+  const addContact = ( name, phone, email, appointments ) => {
     if ( contacts.find( contact => contact.email === email ) ) {
       console.log( 'that email already exists' )
       } else {
       setContacts( [ ...contacts, { 
         name: name, 
         phone: phone, 
-        email: email 
+        email: email,
+        appointments: appointments
       } ] )
     }
   }
@@ -45,11 +48,12 @@ export const ContactsPage = ({ contacts, setContacts }) => {
 
   const handleSubmit = ( e ) => {
     e.preventDefault();
-    addContact( name, phone, email );
+    addContact( name, phone, email, appointments );
     setSubmitting( true );
     setName( '' );
     setPhone( '' );
     setEmail( '' );
+    setAppointments( [] );
     setTimeout( () => {
       setSubmitting( false );
     }, 3000 )
@@ -59,6 +63,15 @@ export const ContactsPage = ({ contacts, setContacts }) => {
     */
   };
 
+  const handleSearchClick = e => {
+    e.preventDefault();
+    setShowSearch( true );
+  }
+
+  const handleHideSearchClick = e => {
+    e.preventDefault();
+    setShowSearch( false );
+  }
 
   return (
     <div>
@@ -76,6 +89,8 @@ export const ContactsPage = ({ contacts, setContacts }) => {
               setPhone={ setPhone }
               email={ email }
               setEmail={ setEmail }
+              appointments={ appointments }
+              setAppointments={ setAppointments }
               handleSubmit={ handleSubmit } />
             </CardBody>
             <CardFooter>
@@ -84,8 +99,7 @@ export const ContactsPage = ({ contacts, setContacts }) => {
           </Card>
         </Col>
         <Col>
-          <ContactsSearch contacts={ contacts } />
-          
+          {showSearch ? <ContactsSearch contacts={ contacts } /> : <Button onClick={ handleSearchClick }>Search Contacts</Button>}
         </Col>
       <hr />
 
